@@ -11,12 +11,16 @@ spec:
   - name: nginx
     image: nginx
   tolerations:        # toleration is set on POD to schedule the POD on the TAINTED NODE.
-  - key: "hardware"   # but there is not gurantee that the TOLERATED POD with schudule only on the TAINTED NODE.
+  - key: "hardware"   # but there is not gurantee that the TOLERATED POD will schudule only on the TAINTED NODE. if will we just use TOLERATION
     operator: "Equal"  # there is a chance that this TOLERATED POD will be scheduled on any avaible NODES not just TAINTED NODE.
-    value: "gpu"
+    value: "gpu"       # we want to work "TOLERATION for gurantee" on POD, then we have to use SELECTORS also like "nodeselectores"
     effect: "NoExecute"
+  # selectors
+  nodeSelector:
+    project: roboshop
 
-# taint is a label put on a node that says: KEEP AWAY, UNLESS YOU HAVE A KEY
+#  k8's will not schudule any pods on the TAINTED NODE
+# taint is a label put on a node that says: KEEP AWAY, UNLESS YOU HAVE A KEY,
 # TAINT acts like a LOCK or DO NOT DISCTURB sign on the server
 
 # TAINT = applied on the NODE, tells the cluster to keep pods away unless they have permission
