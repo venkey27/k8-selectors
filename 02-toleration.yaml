@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-tolerated
+  labels:
+    project: roboshop
+    environment: dev
+    purpose: poc
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  tolerations:
+  - key: "hardware"
+    operator: "Equal"
+    value: "gpu"
+    effect: "NoExecute"
+
+# taint is a label put on a node that says: KEEP AWAY, UNLESS YOU HAVE A KEY
+# TAINT acts like a LOCK or DO NOT DISCTURB sign on the server
+
+# TAINT = applied on the NODE, tells the cluster to keep pods away unless they have permission
+# TOLERATION = applied on the POD, gives the pod permission to land on a tainted node
