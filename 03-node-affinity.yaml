@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-node-affinity
+  labels:
+    app: web
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: In
+            values:
+            - us-east-1a  # pod will be schulded in this 2 avaibility zones, this is the advantage of nodeAffinity
+            - us-east-1c  # pod will be schulded in this 2 avaibility zones, this is the advantage of nodeAffinity
+
+  containers:
+  - name: nginx
+    image: nginx:latest
