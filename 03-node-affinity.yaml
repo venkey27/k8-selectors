@@ -13,8 +13,26 @@ spec:
           - key: topology.kubernetes.io/zone
             operator: In
             values:
-            - us-east-1a  # pod will be schulded in this 2 avaibility zones, this is the advantage of nodeAffinity
+            - us-east-1d  # pod will be schulded in this 2 avaibility zones, this is the advantage of nodeAffinity
             - us-east-1c  # pod will be schulded in this 2 avaibility zones, this is the advantage of nodeAffinity
+
+      # SOFT RULE: Prefers zone us-east-1a (best effort)
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: In
+            values:
+            - us-east-1c
+
+      - weight: 99
+        preference:
+          matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: In
+            values:
+            - us-east-1d
 
   containers:
   - name: nginx
