@@ -11,9 +11,9 @@ spec:
   - name: nginx
     image: nginx
   tolerations:        # toleration is set on POD to schedule the POD on the TAINTED NODE.
-  - key: "hardware"   # but there is not gurantee that the TOLERATED POD will schudule only on the TAINTED NODE. if will we just use TOLERATION
+  - key: "project"   # but there is not gurantee that the TOLERATED POD will schudule only on the TAINTED NODE. if will we just use TOLERATION
     operator: "Equal"  # there is a chance that this TOLERATED POD will be scheduled on any avaible NODES not just TAINTED NODE.
-    value: "gpu"       
+    value: "roboshop"       
     effect: "NoExecute"
   # selectors
   nodeSelector:   # we want to work "TOLERATION for gurantee" on POD, then we have to use SELECTORS also like "nodeselectores"
