@@ -7,21 +7,24 @@ metadata:
 spec:
   affinity:
     nodeAffinity:
+      # Filters the nodes. It acts like a strict filter, checking availability zones and ignoring any nodes that don't match. 
+      # If a node fails this check, it is immediately discarded.
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
           - key: topology.kubernetes.io/zone
             operator: In
             values:
-            - us-east-1d  # pod will be schulded in this 2 avaibility zones, this is the advantage of nodeAffinity
-            - us-east-1c  # pod will be schulded in this 2 avaibility zones, this is the advantage of nodeAffinity
+            - us-east-1d  # pod will be schulded in this 1 of the 2 avaibility zones, this is the advantage of nodeAffinity
+            - us-east-1c  # pod will be schulded in this 1 of the 2 avaibility zones, this is the advantage of nodeAffinity
 
       # SOFT RULE: Prefers zone us-east-1a (best effort)
+      # Scores the remaining nodes. It ranks all nodes that passed the hard rule based on their weight and schedules the pod on the highest-scoring node.
       preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 100
         preference:
           matchExpressions:
-          - key: topology.kubernetes.io/zone
+          - key: topology.kubernetes.io/zone  # the weight is 100 so scheduler picked us-east-1c to schudule pod 
             operator: In
             values:
             - us-east-1c
@@ -29,7 +32,7 @@ spec:
       - weight: 60
         preference:
           matchExpressions:
-          - key: topology.kubernetes.io/zone
+          - key: topology.kubernetes.io/zone # the weight is 60 so scheduler didnt picked on us-east-1d to schudule pod 
             operator: In
             values:
             - us-east-1d
@@ -37,3 +40,6 @@ spec:
   containers:
   - name: nginx
     image: nginx:latest
+
+    # 
+    #
