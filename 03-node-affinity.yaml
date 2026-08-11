@@ -26,7 +26,7 @@ spec:
             values:
             - us-east-1c
 
-      - weight: 99
+      - weight: 60
         preference:
           matchExpressions:
           - key: topology.kubernetes.io/zone
