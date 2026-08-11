@@ -10,9 +10,9 @@ spec:
   containers:
   - name: nginx
     image: nginx
-  tolerations:
-  - key: "hardware"
-    operator: "Equal"
+  tolerations:        # toleration is set on POD to schedule the POD on the TAINTED NODE.
+  - key: "hardware"   # but there is not gurantee that the TOLERATED POD with schudule only on the TAINTED NODE.
+    operator: "Equal"  # there is a chance that this TOLERATED POD will be scheduled on any avaible NODES not just TAINTED NODE.
     value: "gpu"
     effect: "NoExecute"
 
