@@ -23,7 +23,7 @@ spec:
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
-          - key: tier    # pod-2 will also goes in node-1 , avaiable zone is us-east-b, same like in which pod-1 is laying in 
+          - key: tier    # because of "podAffinity", pod-2 will also goes in node-1 , avaiable zone is us-east-b, same like in which pod-1 is laying in 
             operator: In
             values:
             - database
