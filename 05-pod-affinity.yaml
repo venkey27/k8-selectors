@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: pod-1
   labels:
-    project: roboshop
+    project: roboshop         # pod-1 is in node-1 , avaiable zone is us-east-b
     tier: database
 spec:
   containers:
@@ -23,7 +23,7 @@ spec:
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
-          - key: tier
+          - key: tier    # pod-2 will also goes in node-1 , avaiable zone is us-east-b, same like in which pod-1 is laying in 
             operator: In
             values:
             - database
