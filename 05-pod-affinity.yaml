@@ -28,6 +28,8 @@ spec:
             values:
             - database
         topologyKey: topology.kubernetes.io/zone # border is AZ
+  # topologyKey: topology.kubernetes.io/zone inside podAffinity tells Kubernetes: "Find the zone where a matching Pod (tier: database) lives, 
+  # and schedule this new Pod (pod-2) in that same Availability Zone."
   containers:
   - name: nginx
     image: nginx

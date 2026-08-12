@@ -27,7 +27,9 @@ spec:
             operator: In
             values:
             - database
-        topologyKey: "kubernetes.io/hostname" # border is host
+        topologyKey: "kubernetes.io/hostname" # border is host , # Prevents Pods from running on the same host machine. # Node Level
+  # When used inside podAntiAffinity, setting topologyKey: "kubernetes.io/hostname" explicitly tells Kubernetes to schedule the Pod on a different node.
+
   containers:
   - name: nginx
     image: nginx

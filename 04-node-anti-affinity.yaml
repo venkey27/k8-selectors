@@ -26,7 +26,7 @@ spec:
         preference:
           matchExpressions:
           - key: topology.kubernetes.io/zone  # the weight is 100 so scheduler picked us-east-1c to schudule pod 
-            operator: NOTIn # NotIN is anti affinity
+            operator: NotIn # NotIN is anti affinity
             values:
             - us-east-1c
 
