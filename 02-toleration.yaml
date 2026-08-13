@@ -1,3 +1,4 @@
+# taint(taint the node):when database want to get traffic form only one specific "NODE",we taint that specific "NODE",use"TOLERATION" and "nodeAffinity"
 apiVersion: v1
 kind: Pod
 metadata:
