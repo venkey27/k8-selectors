@@ -1,3 +1,5 @@
+# labels are used to communcation between any resources, like service can select pod by using labels
+ # deployment can select pod by using labels  every thing is labels
 apiVersion: v1
 kind: Pod
 metadata:
